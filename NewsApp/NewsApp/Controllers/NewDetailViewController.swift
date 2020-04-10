@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class NewDetailViewController: UIViewController {
     
@@ -14,14 +15,10 @@ class NewDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var imageRect: CGRect?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupTableView()
-        
-        
     }
     
     private func setupTableView() {
@@ -33,6 +30,8 @@ class NewDetailViewController: UIViewController {
         
         let imageNib = UINib(nibName: "ImageNewTableViewCell", bundle: nil)
         self.tableView.register(imageNib, forCellReuseIdentifier: "imageCell")
+        
+        self.tableView.estimatedRowHeight = 160
     }
     
 }
@@ -53,7 +52,17 @@ extension NewDetailViewController: UITableViewDelegate, UITableViewDataSource {
             
             if let imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as? ImageNewTableViewCell {
                 
-                imageCell.newImage.load(url: (new?.urlToImage)!)
+                imageCell.newImage.sd_setImage(with: new?.urlToImage,
+                                               placeholderImage: UIImage(named: "monstersInc"),
+                                               options: .lowPriority,
+                                               context: nil,
+                                               progress: nil) { (downloadedImage, error, cacheType, url) in
+                                                if let error = error {
+                                                    print("Error downloading the image: \(error.localizedDescription)")
+                                                } else {
+                                                    print("Successfully downloaded image: \(String(describing: url?.absoluteString))")
+                                                }
+                }
                 
                 
                 return imageCell
@@ -75,5 +84,8 @@ extension NewDetailViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
+    }
     
 }
