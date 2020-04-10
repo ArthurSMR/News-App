@@ -17,19 +17,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqA-kZ-b1h">
-                        <rect key="frame" x="16" y="8" width="288" height="33.5"/>
+                        <rect key="frame" x="16" y="16" width="288" height="33.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JxT-H9-vGT">
-                        <rect key="frame" x="16" y="49.5" width="288" height="20.5"/>
+                        <rect key="frame" x="16" y="57.5" width="288" height="20.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9lj-0G-1iW">
-                        <rect key="frame" x="16" y="102" width="288" height="20.5"/>
+                        <rect key="frame" x="16" y="110" width="288" height="20.5"/>
                         <attributedString key="attributedText">
                             <fragment content="Author">
                                 <attributes>
@@ -41,7 +41,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3JM-Jz-j8a">
-                        <rect key="frame" x="16" y="130.5" width="288" height="20.5"/>
+                        <rect key="frame" x="16" y="138.5" width="288" height="20.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -56,10 +56,10 @@
                     <constraint firstItem="3JM-Jz-j8a" firstAttribute="top" secondItem="9lj-0G-1iW" secondAttribute="bottom" constant="8" id="Qyz-ou-n0q"/>
                     <constraint firstAttribute="trailing" secondItem="9lj-0G-1iW" secondAttribute="trailing" constant="16" id="Rtd-zZ-hKa"/>
                     <constraint firstAttribute="trailing" secondItem="QqA-kZ-b1h" secondAttribute="trailing" constant="16" id="Su3-3s-PHH"/>
-                    <constraint firstItem="QqA-kZ-b1h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="cbq-k5-BLW"/>
-                    <constraint firstAttribute="bottom" secondItem="3JM-Jz-j8a" secondAttribute="bottom" constant="24" id="sjY-xQ-0XZ"/>
+                    <constraint firstItem="QqA-kZ-b1h" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="cbq-k5-BLW"/>
                     <constraint firstAttribute="trailing" secondItem="JxT-H9-vGT" secondAttribute="trailing" constant="16" id="sov-5l-i2J"/>
                     <constraint firstAttribute="trailing" secondItem="3JM-Jz-j8a" secondAttribute="trailing" constant="16" id="tZx-NF-aWb"/>
+                    <constraint firstAttribute="bottom" secondItem="3JM-Jz-j8a" secondAttribute="bottom" constant="16" id="z9X-3r-1BR"/>
                     <constraint firstItem="JxT-H9-vGT" firstAttribute="top" secondItem="QqA-kZ-b1h" secondAttribute="bottom" constant="8" id="zPP-pv-yGa"/>
                 </constraints>
             </tableViewCellContentView>

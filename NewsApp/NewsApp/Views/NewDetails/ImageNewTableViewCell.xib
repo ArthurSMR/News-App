@@ -16,14 +16,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monstersInc" translatesAutoresizingMaskIntoConstraints="NO" id="9Ej-FF-12K">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="monstersInc" translatesAutoresizingMaskIntoConstraints="NO" id="9Ej-FF-12K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="135" id="VgW-F0-FhH"/>
+                        </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="9Ej-FF-12K" secondAttribute="trailing" id="1aj-kY-4OJ"/>
                     <constraint firstAttribute="bottom" secondItem="9Ej-FF-12K" secondAttribute="bottom" id="RVm-2J-zdA"/>
                     <constraint firstItem="9Ej-FF-12K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="SgO-3H-jdd"/>
+                    <constraint firstItem="9Ej-FF-12K" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="jyO-sW-w1G"/>
                     <constraint firstItem="9Ej-FF-12K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vaJ-4i-xi8"/>
                 </constraints>
             </tableViewCellContentView>
