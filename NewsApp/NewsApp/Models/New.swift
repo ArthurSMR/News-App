@@ -8,15 +8,18 @@
 
 import UIKit
 
-class New {
-    
+struct ArticlesResponse: Decodable {
+    var articles: [New]
+}
+
+struct New: Decodable {
+    //var source: SourceDetail
+//    var content: String
     var title: String
-    var description: String
-    var category: String
-    
-    init(title: String, description: String, category: String) {
-        self.title = title
-        self.description = description
-        self.category = category
-    }
+    var description: String?
+    var content: String?
+}
+
+struct SourceDetail: Decodable {
+    var name: String
 }
