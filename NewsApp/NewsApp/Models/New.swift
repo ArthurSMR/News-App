@@ -13,11 +13,12 @@ struct ArticlesResponse: Decodable {
 }
 
 struct New: Decodable {
-    //var source: SourceDetail
-//    var content: String
-    var title: String
+    var source: SourceDetail
+    var author: String?
+    var title: String?
     var description: String?
     var content: String?
+    var urlToImage: URL?
 }
 
 struct SourceDetail: Decodable {

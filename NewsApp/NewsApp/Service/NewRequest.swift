@@ -34,10 +34,6 @@ struct NewRequest {
                 return
             }
             
-            for json in jsonData {
-                
-            }
-            
             do {
                 let decoder = JSONDecoder()
                 let articlesResponse = try decoder.decode(ArticlesResponse.self, from: jsonData)

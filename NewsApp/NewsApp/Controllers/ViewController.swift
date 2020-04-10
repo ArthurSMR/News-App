@@ -23,12 +23,24 @@ class ViewController: UIViewController {
         }
     }
     
+    var selectedNew: New?
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
         self.fetchNews()
         //self.mockNews = DatabaseMock.news
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showNewDetail" {
+            
+            if let newDetailVC = segue.destination as? NewDetailViewController {
+                newDetailVC.new = self.selectedNew
+            }
+        }
     }
     
     private func fetchNews() {
@@ -39,21 +51,26 @@ class ViewController: UIViewController {
                 print(error)
             case .success(let news):
                 self?.news = news
+            }
         }
     }
-}
-
-private func setupTableView() {
-    self.tableView.delegate = self
-    self.tableView.dataSource = self
     
-    let newsNib = UINib(nibName: "NewsTableViewCell", bundle: nil)
-    self.tableView.register(newsNib, forCellReuseIdentifier: "newsCell")
-}
+    private func setupTableView() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        let newsNib = UINib(nibName: "NewsTableViewCell", bundle: nil)
+        self.tableView.register(newsNib, forCellReuseIdentifier: "newsCell")
+    }
 }
 
 // MARK: TableViewDelegate
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedNew = news[indexPath.row]
+        self.performSegue(withIdentifier: "showNewDetail", sender: self)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return news.count

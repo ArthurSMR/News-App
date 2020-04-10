@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Noticias-->
+        <!--Notícias-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Jrh-dz-H9w">
-                                <rect key="frame" x="0.0" y="140" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="664.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="separatorInset" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
@@ -30,14 +30,46 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Noticias" id="z2R-Ag-c2K"/>
+                    <navigationItem key="navigationItem" title="Notícias" id="z2R-Ag-c2K"/>
                     <connections>
                         <outlet property="tableView" destination="Jrh-dz-H9w" id="aR3-ES-fXQ"/>
+                        <segue destination="SLP-Fv-gwo" kind="show" identifier="showNewDetail" id="MH3-9v-ASp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130" y="854"/>
+        </scene>
+        <!--New Detail View Controller-->
+        <scene sceneID="rUW-Zu-mZG">
+            <objects>
+                <viewController id="SLP-Fv-gwo" customClass="NewDetailViewController" customModule="NewsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AAg-Ke-4OS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Au6-0O-Nru">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Au6-0O-Nru" firstAttribute="leading" secondItem="aL0-cR-Aqz" secondAttribute="leading" id="8R3-Pt-vAz"/>
+                            <constraint firstItem="aL0-cR-Aqz" firstAttribute="trailing" secondItem="Au6-0O-Nru" secondAttribute="trailing" id="bLE-Qj-u3Q"/>
+                            <constraint firstItem="Au6-0O-Nru" firstAttribute="top" secondItem="aL0-cR-Aqz" secondAttribute="top" id="bYZ-7J-Tyc"/>
+                            <constraint firstItem="aL0-cR-Aqz" firstAttribute="bottom" secondItem="Au6-0O-Nru" secondAttribute="bottom" id="xoQ-Cz-JUt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aL0-cR-Aqz"/>
+                    </view>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="g4v-Td-OWh"/>
+                    <connections>
+                        <outlet property="tableView" destination="Au6-0O-Nru" id="KC0-06-jfZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fnF-LS-0ko" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="127.53623188405798" y="1573.6607142857142"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="pI7-fi-7KH">
