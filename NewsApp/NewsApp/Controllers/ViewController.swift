@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    // MARK: Outlet var
+    // MARK: Variables
     @IBOutlet weak var tableView: UITableView!
     
     var mockNews: [New] = []
@@ -27,10 +27,15 @@ class ViewController: UIViewController {
     let refreshControl = UIRefreshControl()
     let actIndicator = UIActivityIndicatorView()
     
+/// Toolbar variables
+    var toolbarLabel: UILabel?
+    var middleButton = UIBarButtonItem()
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        self.setupToolbar()
         self.fetchNews()
     }
     
@@ -62,6 +67,21 @@ class ViewController: UIViewController {
             }
         }
         
+    }
+    
+    private func setupToolbar() {
+        self.navigationController?.isToolbarHidden = false
+        
+        let lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: nil, action: nil)
+        
+        
+        self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height:  30))
+        self.toolbarLabel?.text = "Blasdasa"
+        self.toolbarLabel?.textAlignment = .center
+        
+        self.middleButton = UIBarButtonItem(customView: self.toolbarLabel ?? UILabel())
+        
+        self.setToolbarItems([lineHorizontalButton, self.middleButton, lineHorizontalButton], animated: true)
     }
     
     private func setupRefreshControl() {

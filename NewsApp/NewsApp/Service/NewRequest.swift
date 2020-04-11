@@ -18,7 +18,7 @@ struct NewRequest {
     let API_KEY = "f16ece3fd6404846853de57f57c536db"
     
     init() {
-        let resourceString = "http://newsapi.org/v2/top-headlines?country=br&category=business&apiKey=\(API_KEY)"
+        let resourceString = "http://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=\(API_KEY)"
         
         guard let resourceURL = URL(string: resourceString) else {fatalError()}
         
