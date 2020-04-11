@@ -82,7 +82,7 @@ extension NewDetailViewController: UITableViewDelegate, UITableViewDataSource {
                                                 if let error = error {
                                                     print("Error downloading the image: \(error.localizedDescription)")
                                                 } else {
-                                                    print("Successfully downloaded image: \(String(describing: url?.absoluteString))")
+                                                    print("Downloaded image")
                                                 }
                 }
                 return imageCell

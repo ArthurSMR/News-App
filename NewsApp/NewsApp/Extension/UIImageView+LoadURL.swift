@@ -15,7 +15,6 @@ extension UIImageView {
                 if let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         self?.image = image
-                        print(self?.image?.size)
                         print("loaded image with url: \(url)")
                     }
                 }

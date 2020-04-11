@@ -46,8 +46,11 @@ class ViewController: UIViewController {
     // MARK: Private methods
     private func fetchNews() {
         
-        self.showSpinner(onView: self.view)
-        
+//      Show sppiner if there is no news
+        if news.count == 0 {
+            self.showSpinner(onView: self.view)
+        }
+
         let newRequest = NewRequest()
         newRequest.getNews { [weak self] result in
             switch result {
@@ -64,11 +67,12 @@ class ViewController: UIViewController {
     private func setupRefreshControl() {
         
         self.refreshControl.addTarget(self, action: #selector(refreshed), for: .valueChanged)
-        self.tableView.refreshControl = refreshControl
+        self.tableView.refreshControl = self.refreshControl
     }
     
     @objc func refreshed() {
-        //self.fetchNews()
+        self.fetchNews()
+        self.refreshControl.endRefreshing()
     }
     
     private func setupTableView() {
