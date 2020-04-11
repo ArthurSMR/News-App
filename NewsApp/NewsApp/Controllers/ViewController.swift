@@ -24,13 +24,14 @@ class ViewController: UIViewController {
     }
     
     var selectedNew: New?
+    let refreshControl = UIRefreshControl()
+    let actIndicator = UIActivityIndicatorView()
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
         self.fetchNews()
-        //self.mockNews = DatabaseMock.news
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,8 +43,11 @@ class ViewController: UIViewController {
             }
         }
     }
-    
+    // MARK: Private methods
     private func fetchNews() {
+        
+        self.showSpinner(onView: self.view)
+        
         let newRequest = NewRequest()
         newRequest.getNews { [weak self] result in
             switch result {
@@ -51,16 +55,33 @@ class ViewController: UIViewController {
                 print(error)
             case .success(let news):
                 self?.news = news
+                self?.removeSpinner()
             }
         }
+        
+    }
+    
+    private func setupRefreshControl() {
+        
+        self.refreshControl.addTarget(self, action: #selector(refreshed), for: .valueChanged)
+        self.tableView.refreshControl = refreshControl
+    }
+    
+    @objc func refreshed() {
+        //self.fetchNews()
     }
     
     private func setupTableView() {
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        //Register XIB
         let newsNib = UINib(nibName: "NewsTableViewCell", bundle: nil)
         self.tableView.register(newsNib, forCellReuseIdentifier: "newsCell")
+        
+        //Creating a rerfresh control
+        self.setupRefreshControl()
     }
 }
 

@@ -18,6 +18,7 @@ struct New: Decodable {
     var title: String?
     var description: String?
     var content: String?
+    var url: URL
     var urlToImage: URL?
 }
 

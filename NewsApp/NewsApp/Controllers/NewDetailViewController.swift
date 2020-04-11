@@ -15,10 +15,29 @@ class NewDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+//    MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setupTableView()
+    }
+    
+//    MARK: IBActions
+    @IBAction func shareButtonDidPressed(_ sender: Any) {
+    
+        let shareText = "Veja só essa notícia interessante que achei no ThuiNews:\n\n"
+        self.shareNew(with: shareText)
+    }
+    
+//    MARK: Private methods
+    private func shareNew(with shareText: String) {
+        
+        guard let url = new?.url else { return }
+        let shareContent: [Any] = [shareText, url]
+        let activityController = UIActivityViewController(activityItems: shareContent,
+                                                          applicationActivities: nil)
+        self.present(activityController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
@@ -34,8 +53,11 @@ class NewDetailViewController: UIViewController {
         self.tableView.estimatedRowHeight = 160
     }
     
+    
+
 }
 
+// MARK: TableViewDelegate
 extension NewDetailViewController: UITableViewDelegate, UITableViewDataSource {
     
     
@@ -63,8 +85,6 @@ extension NewDetailViewController: UITableViewDelegate, UITableViewDataSource {
                                                     print("Successfully downloaded image: \(String(describing: url?.absoluteString))")
                                                 }
                 }
-                
-                
                 return imageCell
             }
         case 1:

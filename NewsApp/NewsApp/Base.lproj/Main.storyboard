@@ -62,7 +62,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aL0-cR-Aqz"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="g4v-Td-OWh"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="g4v-Td-OWh">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="OKT-tf-wkN">
+                            <connections>
+                                <action selector="shareButtonDidPressed:" destination="SLP-Fv-gwo" id="a54-Kt-QbM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Au6-0O-Nru" id="KC0-06-jfZ"/>
                     </connections>
