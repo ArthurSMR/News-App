@@ -35,8 +35,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
-        self.setupToolbar()
         self.fetchNews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.setupToolbar()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -75,7 +78,7 @@ class ViewController: UIViewController {
         let lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: nil, action: nil)
         
         
-        self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.width, height:  30))
+        self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:  30))
         self.toolbarLabel?.text = "Blasdasa"
         self.toolbarLabel?.textAlignment = .center
         
