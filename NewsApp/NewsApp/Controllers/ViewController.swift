@@ -26,6 +26,21 @@ class ViewController: UIViewController {
     var selectedNew: New?
     let refreshControl = UIRefreshControl()
     let actIndicator = UIActivityIndicatorView()
+    var lineHorizontalButton = UIBarButtonItem()
+    
+    var _islineHorizontalButtonPressed = false
+    var islineHorizontalButtonPressed: Bool {
+        set {
+            if newValue == false {
+                self.setToolbarCountingNews()
+                _islineHorizontalButtonPressed = newValue
+            } else {
+                self.setToolbarFiltering()
+                _islineHorizontalButtonPressed = newValue
+            }
+        }
+        get { return _islineHorizontalButtonPressed }
+    }
     
 /// Toolbar variables
     var toolbarLabel: UILabel?
@@ -72,19 +87,40 @@ class ViewController: UIViewController {
         
     }
     
-    private func setupToolbar() {
-        self.navigationController?.isToolbarHidden = false
+    private func setToolbarFiltering() {
         
-        let lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: nil, action: nil)
-        
+        self.lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle.fill"), style: .plain, target: self, action: #selector(changeButtonState))
         
         self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:  30))
-        self.toolbarLabel?.text = "Blasdasa"
+        self.toolbarLabel?.text = "Filtrando por: Geral"
         self.toolbarLabel?.textAlignment = .center
         
         self.middleButton = UIBarButtonItem(customView: self.toolbarLabel ?? UILabel())
         
         self.setToolbarItems([lineHorizontalButton, self.middleButton, lineHorizontalButton], animated: true)
+        
+    }
+    
+    private func setToolbarCountingNews() {
+        
+        self.lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(changeButtonState))
+        
+        self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:  30))
+        self.toolbarLabel?.text = "\(news.count) notícias"
+        self.toolbarLabel?.textAlignment = .center
+        
+        self.middleButton = UIBarButtonItem(customView: self.toolbarLabel ?? UILabel())
+        
+        self.setToolbarItems([self.lineHorizontalButton, self.middleButton, self.lineHorizontalButton], animated: true)
+    }
+    
+    @objc func changeButtonState() {
+        self.islineHorizontalButtonPressed = !self.islineHorizontalButtonPressed
+    }
+    
+    private func setupToolbar() {
+        self.navigationController?.isToolbarHidden = false
+        self.setToolbarCountingNews()
     }
     
     private func setupRefreshControl() {
