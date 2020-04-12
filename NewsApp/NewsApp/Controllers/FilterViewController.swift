@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CategoriesFilterDelegate {
+    func didModify(filterByCategories: [String])
+}
+
 class FilterViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -16,6 +20,9 @@ class FilterViewController: UIViewController {
     
     var filterByCategories: [String] = []
     let defaults = UserDefaults.standard
+    
+    var delegate: CategoriesFilterDelegate?
+    var selectedFilterChanged: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +37,15 @@ class FilterViewController: UIViewController {
     
     @IBAction func didOKbuttonPressed(_ sender: UIBarButtonItem) {
         
-        print("buttonOK pressed: \(filterByCategories)")
         self.defaults.set(self.filterByCategories, forKey: "Filter by categories")
+        
+        guard self.selectedFilterChanged else {
+            self.dismiss(animated: true, completion: nil)
+            print(selectedFilterChanged)
+            return
+        }
+        print(selectedFilterChanged)
+        self.delegate?.didModify(filterByCategories: self.filterByCategories)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -50,6 +64,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let categorySelected = self.categories[indexPath.row].name
+        self.selectedFilterChanged = true
         
         if self.filterByCategories.contains(categorySelected) {
             
@@ -60,6 +75,7 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         }
         else  {
             self.filterByCategories.append(self.categories[indexPath.row].name)
+            
             self.tableView.reloadData()
         }
     }
@@ -87,6 +103,4 @@ extension FilterViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
         
     }
-    
-    
 }

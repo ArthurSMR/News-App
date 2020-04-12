@@ -78,6 +78,11 @@ class ViewController: UIViewController {
                 newDetailVC.new = self.selectedNew
             }
         }
+        
+        else if segue.identifier == "filteringVC", let navigation = segue.destination as? FilterViewController{
+            navigation.delegate = self
+            print("delegate")
+        }
     }
     
     // MARK: Private methods
@@ -200,3 +205,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension ViewController: CategoriesFilterDelegate {
+    
+    func didModify(filterByCategories: [String]) {
+        print("didmodify")
+    }
+}
