@@ -96,9 +96,9 @@ class ViewController: UIViewController {
             case .success(let news):
                 self?.news = news
                 self?.removeSpinner()
+                print("fetch with sucess")
             }
         }
-        
     }
     
     private func setToolbarFiltering() {

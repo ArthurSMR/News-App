@@ -19,7 +19,8 @@ class FilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.categories = CategoriesMock.newsCategory
+        
+        self.categories = CategoriesMock.allCategories
         
         self.filterByCategories = self.defaults.object(forKey: "Filter by categories") as? [String] ?? [String]()
         

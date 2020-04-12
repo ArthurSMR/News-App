@@ -27,8 +27,7 @@ struct NewRequest {
         var resourceURL: [URL] = []
         
         if resourceStrings.isEmpty {
-            resourceURL[0] = "http://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=\(API_KEY)".toURL()
-            self.resourcesURL = resourceURL
+            self.newsCategories.append(CategoriesMock.general)
         }
             
         else {
@@ -44,6 +43,7 @@ struct NewRequest {
                     print("news category not found")
                 }
             }
+        }
             
             for newCategory in self.newsCategories {
                 
@@ -54,7 +54,7 @@ struct NewRequest {
             }
             
             self.resourcesURL = resourceURL
-        }
+        
     }
     
     func getNews(completion: @escaping(Result<[New], NewError>) -> Void) {
@@ -70,6 +70,8 @@ struct NewRequest {
                 
                 do {
                     let decoder = JSONDecoder()
+                    
+                    print("trying to decode: \(newCategory.name)")
                     let articlesResponse = try decoder.decode(ArticlesResponse.self, from: jsonData)
                     
                     var newsDetails = articlesResponse.articles

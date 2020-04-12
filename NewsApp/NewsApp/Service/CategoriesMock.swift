@@ -26,6 +26,26 @@ class CategoriesMock {
 //            return arr
 //        }
     
+    static var allCategories: [NewsCategory] {
+        
+        var all: [NewsCategory] = []
+        all.append(entertainment)
+        all.append(business)
+        return all
+    }
+    
+    static var general : NewsCategory {
+        
+        let imageViewBus = UIImageView()
+        imageViewBus.image = UIImage(named: "business")
+        
+        let generalURL = "http://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey="
+        
+        let general = NewsCategory(name: "Geral", apiURL: generalURL, iconImage: imageViewBus)
+        
+        return general
+    }
+    
     static var entertainment: NewsCategory {
         
         let entertainmentURL = "http://newsapi.org/v2/top-headlines?country=br&category=entertainment&apiKey="
@@ -49,4 +69,6 @@ class CategoriesMock {
         
         return business
     }
+    
+    
 }
