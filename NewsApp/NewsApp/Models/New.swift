@@ -20,6 +20,7 @@ struct New: Decodable {
     var content: String?
     var url: URL
     var urlToImage: URL?
+    var category: String?
 }
 
 struct SourceDetail: Decodable {

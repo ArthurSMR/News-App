@@ -14,36 +14,73 @@ enum NewError: Error {
 }
 
 struct NewRequest {
-    let resourceURL: URL
+    var resourcesURL: [URL]
+    let resourceStrings: [String]
     let API_KEY = "f16ece3fd6404846853de57f57c536db"
+    var newsCategories: [NewsCategory] = []
+    let defaults = UserDefaults()
     
     init() {
-        let resourceString = "http://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=\(API_KEY)"
         
-        guard let resourceURL = URL(string: resourceString) else {fatalError()}
+        resourceStrings = defaults.object(forKey: "Filter by categories") as? [String] ?? [String]()
         
-        self.resourceURL = resourceURL
+        var resourceURL: [URL] = []
+        
+        if resourceStrings.isEmpty {
+            resourceURL[0] = "http://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=\(API_KEY)".toURL()
+            self.resourcesURL = resourceURL
+        }
+            
+        else {
+            
+            for resourceString in resourceStrings {
+                
+                switch resourceString {
+                case "Entretenimento":
+                    self.newsCategories.append(CategoriesMock.entertainment)
+                case "Negócios":
+                    self.newsCategories.append(CategoriesMock.business)
+                default:
+                    print("news category not found")
+                }
+            }
+            
+            for newCategory in self.newsCategories {
+                
+                let resourceString = newCategory.apiURL + API_KEY
+                print(resourceString)
+                
+                resourceURL.append(resourceString.toURL())
+            }
+            
+            self.resourcesURL = resourceURL
+        }
     }
     
     func getNews(completion: @escaping(Result<[New], NewError>) -> Void) {
         
-        let dataTask = URLSession.shared.dataTask(with: resourceURL) {data, _, _ in
+        for newCategory in newsCategories {
             
-            guard let jsonData = data else {
-                completion(.failure(.noDataAvailable))
-                return
+            let dataTask = URLSession.shared.dataTask(with: (newCategory.apiURL + API_KEY).toURL()) {data, _, _ in
+                
+                guard let jsonData = data else {
+                    completion(.failure(.noDataAvailable))
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let articlesResponse = try decoder.decode(ArticlesResponse.self, from: jsonData)
+                    
+                    let newDetails = articlesResponse.articles
+
+                    completion(.success(newDetails))
+                } catch {
+                    completion(.failure(.canNotProcessData))
+                }
             }
+            dataTask.resume()
             
-            do {
-                let decoder = JSONDecoder()
-                let articlesResponse = try decoder.decode(ArticlesResponse.self, from: jsonData)
-                let newDetails = articlesResponse.articles
-                completion(.success(newDetails))
-            } catch {
-                completion(.failure(.canNotProcessData))
-            }
         }
-        dataTask.resume()
-        
     }
 }

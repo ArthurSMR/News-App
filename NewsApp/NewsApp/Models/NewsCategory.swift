@@ -8,7 +8,15 @@
 
 import UIKit
 
-enum NewsCategories: String {
-    case General = "Geral"
-    case Business = "Negócios"
+class NewsCategory {
+    
+    let name: String
+    var apiURL: String
+    let iconImage: UIImageView
+    
+    init(name: String, apiURL: String, iconImage: UIImageView) {
+        self.name = name
+        self.apiURL = apiURL
+        self.iconImage = iconImage
+    }
 }

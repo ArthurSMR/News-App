@@ -110,7 +110,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MzM-Hg-SIX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Filtros" id="e9t-4h-9aZ"/>
+                    <navigationItem key="navigationItem" title="Filtros" id="e9t-4h-9aZ">
+                        <barButtonItem key="rightBarButtonItem" title="OK" id="La3-6j-TJG">
+                            <connections>
+                                <action selector="didOKbuttonPressed:" destination="3CT-Lj-u1S" id="GVw-16-fAq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="uCk-qX-4Ga" id="jx5-vk-oo5"/>
                     </connections>
@@ -126,7 +132,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="hPN-Az-x2u"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="81c-I6-nII">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

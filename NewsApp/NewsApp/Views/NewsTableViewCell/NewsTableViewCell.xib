@@ -49,6 +49,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="categoryLabel" destination="iHG-nI-zfn" id="KAY-Gw-0Rj"/>
                 <outlet property="descriptionLabel" destination="oRp-pa-ELc" id="EjJ-z8-AQe"/>
                 <outlet property="titleLabel" destination="iJR-PC-ceI" id="BDb-92-Teo"/>
             </connections>

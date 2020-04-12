@@ -47,15 +47,23 @@ class ViewController: UIViewController {
     var middleButton = UIBarButtonItem()
     var invisibleButton = UIBarButtonItem() //This button is just for support
     
+    // Filter variables
+    var filterByCategories: [String] = []
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        
+        let defaults = UserDefaults.standard
+        self.filterByCategories = defaults.object(forKey: "Filter by categories") as? [String] ?? [String]()
+        
+        
         self.fetchNews()
     }
     
     @objc func filterDidPressed() {
-        self.performSegue(withIdentifier: "filteringVC  ", sender: self)
+        self.performSegue(withIdentifier: "filteringVC", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,19 +78,16 @@ class ViewController: UIViewController {
                 newDetailVC.new = self.selectedNew
             }
         }
-        
-        if segue.identifier == "filteringVC" {
-            print("xama")
-        }
     }
+    
     // MARK: Private methods
     private func fetchNews() {
         
-//      Show sppiner if there is no news
+        //      Show sppiner if there is no news
         if news.count == 0 {
             self.showSpinner(onView: self.view)
         }
-
+        
         let newRequest = NewRequest()
         newRequest.getNews { [weak self] result in
             switch result {
@@ -187,6 +192,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             newsCell.titleLabel.text = news[indexPath.row].title
             newsCell.descriptionLabel.text = news[indexPath.row].description
+            
             return newsCell
         }
         
