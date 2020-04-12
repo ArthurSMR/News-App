@@ -192,7 +192,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
             newsCell.titleLabel.text = news[indexPath.row].title
             newsCell.descriptionLabel.text = news[indexPath.row].description
-            
+            newsCell.categoryLabel.text = news[indexPath.row].category
             return newsCell
         }
         

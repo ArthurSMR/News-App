@@ -21,6 +21,10 @@ struct New: Decodable {
     var url: URL
     var urlToImage: URL?
     var category: String?
+    
+    mutating func setCategory(category: String) {
+        self.category = category
+    }
 }
 
 struct SourceDetail: Decodable {

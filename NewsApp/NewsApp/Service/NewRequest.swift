@@ -72,9 +72,13 @@ struct NewRequest {
                     let decoder = JSONDecoder()
                     let articlesResponse = try decoder.decode(ArticlesResponse.self, from: jsonData)
                     
-                    let newDetails = articlesResponse.articles
-
-                    completion(.success(newDetails))
+                    var newsDetails = articlesResponse.articles
+                    
+                    for index in 0 ..< newsDetails.count {
+                        newsDetails[index].setCategory(category: newCategory.name)
+                    }
+                    
+                    completion(.success(newsDetails))
                 } catch {
                     completion(.failure(.canNotProcessData))
                 }
