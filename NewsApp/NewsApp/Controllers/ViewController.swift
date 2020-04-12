@@ -26,8 +26,8 @@ class ViewController: UIViewController {
     var selectedNew: New?
     let refreshControl = UIRefreshControl()
     let actIndicator = UIActivityIndicatorView()
-    var lineHorizontalButton = UIBarButtonItem()
     
+    /// Toolbar variables
     var _islineHorizontalButtonPressed = false
     var islineHorizontalButtonPressed: Bool {
         set {
@@ -42,15 +42,20 @@ class ViewController: UIViewController {
         get { return _islineHorizontalButtonPressed }
     }
     
-/// Toolbar variables
     var toolbarLabel: UILabel?
+    var lineHorizontalButton = UIBarButtonItem()
     var middleButton = UIBarButtonItem()
+    var invisibleButton = UIBarButtonItem() //This button is just for support
     
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
         self.fetchNews()
+    }
+    
+    @objc func filterDidPressed() {
+        self.performSegue(withIdentifier: "filteringVC  ", sender: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +69,10 @@ class ViewController: UIViewController {
             if let newDetailVC = segue.destination as? NewDetailViewController {
                 newDetailVC.new = self.selectedNew
             }
+        }
+        
+        if segue.identifier == "filteringVC" {
+            print("xama")
         }
     }
     // MARK: Private methods
@@ -91,13 +100,20 @@ class ViewController: UIViewController {
         
         self.lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle.fill"), style: .plain, target: self, action: #selector(changeButtonState))
         
+        // This will stay on the middle of the toolbar
         self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:  30))
-        self.toolbarLabel?.text = "Filtrando por: Geral"
+        self.toolbarLabel?.text = "Filtrando por: geral"
         self.toolbarLabel?.textAlignment = .center
         
-        self.middleButton = UIBarButtonItem(customView: self.toolbarLabel ?? UILabel())
         
-        self.setToolbarItems([lineHorizontalButton, self.middleButton, lineHorizontalButton], animated: true)
+        let filterButton = UIButton(type: .custom)
+        filterButton.frame = CGRect(x: 0, y: 0, width: self.view.frame.width * 0.7, height: 30)
+        filterButton.setTitle("eai", for: .normal)
+        filterButton.addTarget(self, action: #selector(self.filterDidPressed), for: .touchUpInside)
+        
+        self.middleButton = UIBarButtonItem(customView: filterButton)
+        
+        self.setToolbarItems([lineHorizontalButton, self.middleButton], animated: true)
         
     }
     
@@ -105,13 +121,18 @@ class ViewController: UIViewController {
         
         self.lineHorizontalButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3.decrease.circle"), style: .plain, target: self, action: #selector(changeButtonState))
         
+        //creating invisible button
+        self.invisibleButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        self.invisibleButton.tintColor = UIColor.red.withAlphaComponent(0.0)
+        
+        // toolbar label for its middle button
         self.toolbarLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height:  30))
         self.toolbarLabel?.text = "\(news.count) notícias"
         self.toolbarLabel?.textAlignment = .center
         
         self.middleButton = UIBarButtonItem(customView: self.toolbarLabel ?? UILabel())
         
-        self.setToolbarItems([self.lineHorizontalButton, self.middleButton, self.lineHorizontalButton], animated: true)
+        self.setToolbarItems([self.lineHorizontalButton, self.middleButton, self.invisibleButton], animated: true)
     }
     
     @objc func changeButtonState() {
